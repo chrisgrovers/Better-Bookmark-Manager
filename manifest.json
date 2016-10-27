@@ -1,6 +1,12 @@
 {
+	"manifest_version": 2,
 	"name": "Better Bookmark Manager",
+	"author": "Chris Grovers",
+	"default_locale": "en",
+	"description": "A more user friendly bookmark manager for chrome",
 	"permissions": [
-		"bookmarks"	
-	]
+		"bookmarks",
+		"activeTab"	
+	],
+	"version": "0.1"
 }
