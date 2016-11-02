@@ -9,3 +9,10 @@
 *
 *
 **/
+(function() {
+    console.log('working');
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    chrome.tabs.executeScript({
+    });
+  });
+})();
