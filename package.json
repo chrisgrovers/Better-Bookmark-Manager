@@ -1,0 +1,16 @@
+{
+  "name": "betterbookmarks",
+  "version": "1.0.0",
+  "description": "Chrome extension for better and simpler bookmark management",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/chrisgrovers/Better-Bookmark-Manager.git",
+    "type": "git"
+  },
+  "author": "Chris Grovers <chris@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.1"
+  }
+}
