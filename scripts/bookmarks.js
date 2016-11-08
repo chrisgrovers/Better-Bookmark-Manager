@@ -32,14 +32,17 @@
 
   $bookmarkContainer.setDefaultState = function() {
     chrome.bookmarks.getTree(function(marks) {
-      _.each(_.first(marks).children, function(bookmark) {
-        addBookMarks(bookmark);
-      })
+      addBookMarksFromObj(_.first(marks).children);
     })
   };
 
   $bookmarkContainer.setDefaultState();
 
+  var addBookMarksFromObj = function(marks) {
+    _.each(marks, function(bookmark) {
+      addBookMarks(bookmark);
+    });
+  };
   var addBookMarks = function(bookmarkObj) {
     if (bookmarkObj.children) {
       $bookmarkContainer.addFolder(bookmarkObj);
@@ -47,23 +50,22 @@
     else {
       $bookmarkContainer.addBookmark(bookmarkObj);
     }
-  }
+  };
 
-  $('.input').on('change', function(text) {
-    debugger;
+  $('input.search').on('input', function(e) {
     $bookmarkContainer.empty();
-    if (_.isEmpty(text)) {
+    if (_.isEmpty(this.value)) {
       $bookmarkContainer.setDefaultState();
     }
     else {
-      chrome.bookmarks.search(text, addBookMarks);
+      chrome.bookmarks.search(this.value, addBookMarksFromObj);
     }
-  })
+  });
 
   $('.button').on('click', function() {
     chrome.bookmarks.getTree(function(marks) {
       console.log(marks)
     });
-  })
+  });
 
 })();
