@@ -23,11 +23,15 @@
   var $bookmarkContainer = $('.bookmark-container');
   $bookmarkContainer.addFolder = function(folderObj) {
     // TODO: Add click event listener to open folder
-    this.append("<div>" + folderObj.title+ "</div>")
+    var $folderObj = $("<li class='folder-li'></li>")
+    $folderObj.append("<a>" + folderObj.title+ "</a>")
+    this.append($folderObj)
   };
-  $bookmarkContainer.addBookmark = function(folderObj) {
+  $bookmarkContainer.addBookmark = function(bookmarkObj) {
     // TODO: Add click event listener to open tab on new page, or on current page?
-    this.append("<div>" + folderObj.title+ "</div>")
+    var $bookmarkObj = $("<li class='bookmark-li'></li>")
+    $bookmarkObj.append("<a target=\"_blank\" href=\"" + bookmarkObj.url + "\">" + bookmarkObj.title+ "</a>")
+    this.append($bookmarkObj);
   };
 
   $bookmarkContainer.setDefaultState = function() {
