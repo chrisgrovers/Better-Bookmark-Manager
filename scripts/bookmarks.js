@@ -21,6 +21,12 @@
     var $folderObj = $("<li class='folder-li'></li>")
     $folderObj.append("<a>" + folderObj.title+ "</a>")
     this.append($folderObj)
+    $folderObj.on('click', function(e) {
+      // Add back button
+      // Set Parent ID
+      // Open up children
+      addBookMarksFromObj(folderObj.children);
+    })
   };
   $bookmarkContainer.addBookmark = function(bookmarkObj) {
     // TODO: Add click event listener to open tab on new page, or on current page?
