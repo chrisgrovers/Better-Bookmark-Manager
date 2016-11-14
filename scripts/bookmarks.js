@@ -2,24 +2,19 @@
 * TODO:
 * Create a list of bookmarks
 * - Account for folders
+*   - Folder click should change parent id
+*   - Open up to the last viewed tree
+*     - Parent ID should persist
 * - Nesting of folders
 * - Batch delete bookmarks
 * - Batch move bookmarks
-* - Open up to the last viewed tree
 * - Bookmark search
+*   - Ability to hide certain bookmarks from searches
 * Last visited feature?
 *
 *
 **/
 (function() {
-  // var bookmarkUtils = {
-  //   getRecentBookMarks = function(num) {
-  //     return chrome.bookmarks.getRecentBookMarks(num, function(bookmarks) {
-  //       return bookmarks;
-  //     });
-  //   }
-  // }
-
   var $bookmarkContainer = $('.bookmark-container');
   $bookmarkContainer.addFolder = function(folderObj) {
     // TODO: Add click event listener to open folder
@@ -64,12 +59,6 @@
     else {
       chrome.bookmarks.search(this.value, addBookMarksFromObj);
     }
-  });
-
-  $('.button').on('click', function() {
-    chrome.bookmarks.getTree(function(marks) {
-      console.log(marks)
-    });
   });
 
 })();
