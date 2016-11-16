@@ -16,23 +16,25 @@
 **/
 (function() {
   var $bookmarkContainer = $('.bookmark-container');
-  $bookmarkContainer.addFolder = function(folderObj) {
+  var addFolder = function(folderObj, parentEl) {
+    parentEl = parentEl || $bookmarkContainer;
     // TODO: Add click event listener to open folder
     var $folderObj = $("<li class='folder-li'></li>")
     $folderObj.append("<a>" + folderObj.title+ "</a>")
-    this.append($folderObj)
+    parentEl.append($folderObj)
     $folderObj.on('click', function(e) {
       // Add back button
       // Set Parent ID
       // Open up children
-      addBookMarksFromObj(folderObj.children);
+      addBookMarksFromObj(folderObj.children, $folderObj);
     })
   };
-  $bookmarkContainer.addBookmark = function(bookmarkObj) {
+  var addBookmark = function(bookmarkObj, parentEl) {
+    parentEl = parentEl || $bookmarkContainer;
     // TODO: Add click event listener to open tab on new page, or on current page?
     var $bookmarkObj = $("<li class='bookmark-li'></li>")
     $bookmarkObj.append("<a target=\"_blank\" href=\"" + bookmarkObj.url + "\">" + bookmarkObj.title+ "</a>")
-    this.append($bookmarkObj);
+    parentEl.append($bookmarkObj);
   };
 
   $bookmarkContainer.setDefaultState = function() {
@@ -43,17 +45,18 @@
 
   $bookmarkContainer.setDefaultState();
 
-  var addBookMarksFromObj = function(marks) {
+  var addBookMarksFromObj = function(marks, parent) {
     _.each(marks, function(bookmark) {
-      addBookMarks(bookmark);
+      addBookMarks(bookmark, parent);
     });
   };
-  var addBookMarks = function(bookmarkObj) {
+  var addBookMarks = function(bookmarkObj, parent) {
+    $parentEl = parent || $bookmarkContainer;
     if (bookmarkObj.children) {
-      $bookmarkContainer.addFolder(bookmarkObj);
+      addFolder(bookmarkObj, $parentEl);
     }
     else {
-      $bookmarkContainer.addBookmark(bookmarkObj);
+      addBookmark(bookmarkObj, $parentEl);
     }
   };
 
