@@ -20,13 +20,20 @@
     parentEl = parentEl || $bookmarkContainer;
     // TODO: Add click event listener to open folder
     var $folderObj = $("<li class='folder-li'></li>")
+    $folderObj.clicked = false;
     $folderObj.append("<a>" + folderObj.title+ "</a>")
     parentEl.append($folderObj)
     $folderObj.on('click', function(e) {
       // Add back button
       // Set Parent ID
       // Open up children
-      addBookMarksFromObj(folderObj.children, $folderObj);
+      if (!$folderObj.clicked) {
+        addBookMarksFromObj(folderObj.children, $folderObj);
+        $folderObj.clicked = true;
+      } else {
+        $folderObj.find('li').empty();
+        $folderObj.clicked = false;
+      }
     })
   };
   var addBookmark = function(bookmarkObj, parentEl) {

@@ -19,7 +19,7 @@
 				"node_modules/lodash/lodash.js"
 			],
 			"css": [
-				"/style/input.css"
+				"/style/css/input.css"
 			]
 		}
 	],

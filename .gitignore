@@ -1,1 +1,3 @@
 node_modules/*
+style/.sass-cache/
+.sass-cache

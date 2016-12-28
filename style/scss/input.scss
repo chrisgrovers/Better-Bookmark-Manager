@@ -3,6 +3,7 @@ $primary-color: red;
 
 body {
   font: 100% $font-stack;
+  min-width: 200px;
 }
 
 input.search {
