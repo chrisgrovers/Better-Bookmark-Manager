@@ -30,10 +30,17 @@
       if (!$folderObj.clicked) {
         addBookMarksFromObj(folderObj.children, $folderObj);
         $folderObj.clicked = true;
+        e.preventDefault();
+        e.stopPropagation();
       } else {
         $folderObj.find('li').empty();
         $folderObj.clicked = false;
+        $folderObj.toggleClass('active');
       }
+    });
+
+    $folderObj.hover(function(e) {
+      $folderObj.toggleClass('active');
     })
   };
   var addBookmark = function(bookmarkObj, parentEl) {
@@ -67,14 +74,14 @@
     }
   };
 
-  $('input.search').on('input', function(e) {
-    $bookmarkContainer.empty();
-    if (_.isEmpty(this.value)) {
-      $bookmarkContainer.setDefaultState();
-    }
-    else {
-      chrome.bookmarks.search(this.value, addBookMarksFromObj);
-    }
-  });
+  $('input.search').on('input', _.debounce(function() {
+      $bookmarkContainer.empty();
+      if (_.isEmpty(this.value)) {
+        $bookmarkContainer.setDefaultState();
+      }
+      else {
+        chrome.bookmarks.search(this.value, addBookMarksFromObj);
+      }
+    }, 700));
 
 })();
