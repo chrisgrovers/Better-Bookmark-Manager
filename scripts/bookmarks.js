@@ -20,13 +20,27 @@
     parentEl = parentEl || $bookmarkContainer;
     // TODO: Add click event listener to open folder
     var $folderObj = $("<li class='folder-li'></li>")
+    $folderObj.clicked = false;
     $folderObj.append("<a>" + folderObj.title+ "</a>")
     parentEl.append($folderObj)
     $folderObj.on('click', function(e) {
       // Add back button
       // Set Parent ID
       // Open up children
-      addBookMarksFromObj(folderObj.children, $folderObj);
+      if (!$folderObj.clicked) {
+        addBookMarksFromObj(folderObj.children, $folderObj);
+        $folderObj.clicked = true;
+        e.preventDefault();
+        e.stopPropagation();
+      } else {
+        $folderObj.find('li').empty();
+        $folderObj.clicked = false;
+        $folderObj.toggleClass('active');
+      }
+    });
+
+    $folderObj.hover(function(e) {
+      $folderObj.toggleClass('active');
     })
   };
   var addBookmark = function(bookmarkObj, parentEl) {
@@ -60,14 +74,14 @@
     }
   };
 
-  $('input.search').on('input', function(e) {
-    $bookmarkContainer.empty();
-    if (_.isEmpty(this.value)) {
-      $bookmarkContainer.setDefaultState();
-    }
-    else {
-      chrome.bookmarks.search(this.value, addBookMarksFromObj);
-    }
-  });
+  $('input.search').on('input', _.debounce(function() {
+      $bookmarkContainer.empty();
+      if (_.isEmpty(this.value)) {
+        $bookmarkContainer.setDefaultState();
+      }
+      else {
+        chrome.bookmarks.search(this.value, addBookMarksFromObj);
+      }
+    }, 700));
 
 })();

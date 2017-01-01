@@ -1,0 +1,47 @@
+$font-stack:    Helvetica, sans-serif;
+$color-shade: #00ADB5;
+$color-primary-text: #303841;
+$color-background: #EEEEEE;
+$color-action: #FF5722;
+
+body {
+  font: 100% $font-stack;
+  min-width: 200px;
+  color: $color-primary-text;
+}
+
+input.search {
+  width: 100%;
+  height: 30px;
+}
+
+
+.active {
+  background-color: #0000;
+}
+
+.bookmark-container {
+  list-style-type: none;
+  margin-left: 0px;
+  padding: 5px;
+  font-size: 14px;
+
+
+  li {
+    margin: 5px;
+    background-color: inherit;
+    cursor: hand;
+
+
+    a {
+      color: $color-primary-text;
+
+      &:active {
+        background-color: $color-action;
+      }
+    }
+  }
+}
+
+/*# sourceMappingURL=input.css.map */
+/* sass --watch scss:css */
